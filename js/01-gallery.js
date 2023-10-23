@@ -39,4 +39,25 @@ function renderGalleryMarkup(images){
    galleryList.innerHTML = markup;
 }
 renderGalleryMarkup(galleryItems)
+
+
+
+
+
+
+
+
+galleryList.addEventListener('click', onClick)
+
+function onClick(evt){
+if(evt.target.nodeName === 'IMG'){
+   return;
+}
+console.log("Це картинка")
+}
+
+
+
+
+
 // console.log(galleryItems);
