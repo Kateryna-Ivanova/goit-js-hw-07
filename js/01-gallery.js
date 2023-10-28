@@ -1,4 +1,3 @@
-
 import { galleryItems } from './gallery-items.js';
 const galleryList = document.querySelector('.gallery');
 console.log(galleryList)
@@ -18,23 +17,33 @@ function renderGalleryMarkup(images){
 
 // Додаємо розмітку галереї на сорінці
 renderGalleryMarkup(galleryItems)
-// Додаємо реакцію на галерею
-galleryList.addEventListener('click', onClick)
+// // Додаємо реакцію на галерею
+galleryList.addEventListener('click', openModal);
 
-// ф-я того що відбуватиметься при кліку
-function onClick(evt){
-// Кажемо щоб прі кліку не було завантаження
-   evt.preventDefault();
-   // Кажемо, якщо це не картинка,то не реагувати на клік
-if(evt.target.nodeName !== 'IMG'){
-   return;}
+// Функція того, що відбуватиметься при кліку
+function openModal(evt) {
+  // Кажемо, щоб при кліку не було завантаження
+  evt.preventDefault();
+  // Кажемо, якщо це не картинка, то не реагувати на клік
+  if (evt.target.nodeName !== 'IMG') {
+    return;
+  }
 
-   const instance = basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`);
-      instance.show();
+  const instance = basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`);
 
-galleryList.addEventListener("keydown", (evt)=>{
-         if (evt.code === "Escape"){
-            instance.close();
-         }});
+  // Встановлюємо слухача клавіатури при відкритті модального вікна
+   instance.show();
+   // закриття модального вікна
+   document.addEventListener("keydown", (evt) => {
+      if (evt.code === "Escape") {
+         instance.close();
+      }
+   })
+   document.removeEventListener("keydown", evt)
 }
+
+
+
+
+
 
